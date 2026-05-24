@@ -1,0 +1,1 @@
+Vyom AI is a real-time fraud prediction platform that detects suspicious transactions and scam messages before financial loss occurs using AI-powered risk analysis.
