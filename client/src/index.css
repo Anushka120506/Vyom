@@ -243,3 +243,29 @@ tr:hover {
 
   border: 1px solid #374151;
 }
+
+.fraud-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 1rem;
+
+  margin-top: 2rem;
+
+  max-width: 600px;
+}
+
+.fraud-input {
+  padding: 1rem;
+
+  border-radius: 8px;
+
+  border: 1px solid #374151;
+
+  background: #111827;
+
+  color: white;
+
+  font-size: 1rem;
+}
