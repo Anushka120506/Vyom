@@ -1,4 +1,5 @@
 import RiskCard from "../components/RiskCard";
+import TransactionTable from "../components/TransactionTable";
 
 function Dashboard() {
   return (
@@ -30,6 +31,8 @@ function Dashboard() {
           status="AI Detection Running"
         />
       </div>
+
+      <TransactionTable />
     </div>
   );
 }
