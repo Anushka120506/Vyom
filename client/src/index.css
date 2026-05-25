@@ -481,3 +481,95 @@ table tr:hover {
 button:hover {
   transform: translateY(-2px);
 }
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    );
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+
+    min-height: auto;
+
+    border-right: none;
+
+    border-bottom: 1px solid #1f2937;
+  }
+
+  .sidebar-links {
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+  }
+
+  .dashboard-content {
+    padding: 20px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    flex-direction: column;
+
+    height: auto;
+
+    padding: 20px;
+  }
+
+  .nav-links {
+    margin-top: 15px;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+  }
+
+  table {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header h1 {
+    font-size: 30px;
+  }
+
+  .dashboard-header p {
+    font-size: 15px;
+  }
+
+  .risk-card-body h1 {
+    font-size: 32px;
+  }
+
+  .fraud-form {
+    width: 100%;
+  }
+
+  .fraud-form input,
+  .fraud-form button,
+  textarea {
+    width: 100%;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+}
