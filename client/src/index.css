@@ -208,3 +208,64 @@ tr:hover {
 
   font-size: 24px;
 }
+/* =========================
+   SIDEBAR LAYOUT
+========================= */
+
+.dashboard-layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+
+  min-height: 100vh;
+
+  background-color: #111827;
+
+  border-right: 1px solid #1f2937;
+
+  padding: 30px 20px;
+}
+
+.sidebar-logo {
+  font-size: 28px;
+
+  margin-bottom: 40px;
+}
+
+.sidebar-links {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.sidebar-links a {
+  color: #d1d5db;
+
+  padding: 14px 16px;
+
+  border-radius: 10px;
+
+  transition: 0.3s ease;
+}
+
+.sidebar-links a:hover {
+  background-color: #1e293b;
+
+  color: #ffffff;
+}
+
+.sidebar-links .active {
+  background-color: #2563eb;
+
+  color: #ffffff;
+}
+
+.dashboard-content {
+  flex: 1;
+
+  padding: 40px;
+}
