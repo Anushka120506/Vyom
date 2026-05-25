@@ -2,6 +2,8 @@ import Sidebar from "../components/Sidebar";
 import RiskCard from "../components/RiskCard";
 import FraudChart from "../components/FraudChart";
 import TransactionTable from "../components/TransactionTable";
+import FraudChart from "../components/FraudChart";
+import "../styles/dashboard.css";
 
 import {
   FaShieldAlt,
@@ -60,7 +62,12 @@ function Dashboard() {
         <TransactionTable />
       </div>
     </div>
-  );
+
+    <FraudChart />
+
+    <TransactionTable />
+  </div>
+);
 }
 
 export default Dashboard;
