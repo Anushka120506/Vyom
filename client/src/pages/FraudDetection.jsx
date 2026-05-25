@@ -1,41 +1,39 @@
 import { useState } from "react";
 
 function FraudDetection() {
-  const [formData, setFormData] = useState({
-    amount: "",
-    receiver: "",
-    transactionType: "",
-  });
+  const [amount, setAmount] =
+    useState("");
 
-  const [loading, setLoading] = useState(false);
+  const [location, setLocation] =
+    useState("");
 
-  const [result, setResult] = useState(null);
+  const [device, setDevice] =
+    useState("");
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
+  const [result, setResult] =
+    useState("");
 
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    setLoading(true);
+    if (
+      amount === "" ||
+      location === "" ||
+      device === ""
+    ) {
+      setResult("Please fill all fields");
+      return;
+    }
 
-    setTimeout(() => {
-      setResult({
-        risk: "High",
-
-        score: "89%",
-
-        message:
-          "Suspicious transaction pattern detected.",
-      });
-
-      setLoading(false);
-    }, 1500);
+    if (amount > 5000) {
+      setResult(
+        "⚠️ High Fraud Risk Detected"
+      );
+    } else {
+      setResult(
+        "✅ Transaction Looks Safe"
+      );
+    }
   };
 
   return (
@@ -43,77 +41,48 @@ function FraudDetection() {
       <h1>Fraud Detection System</h1>
 
       <form
-        onSubmit={handleSubmit}
         className="fraud-form"
+        onSubmit={handleSubmit}
       >
         <input
           type="number"
-          name="amount"
           placeholder="Transaction Amount"
-          value={formData.amount}
-          onChange={handleChange}
-          className="fraud-input"
+          value={amount}
+          onChange={(e) =>
+            setAmount(e.target.value)
+          }
         />
 
         <input
           type="text"
-          name="receiver"
-          placeholder="Receiver Name"
-          value={formData.receiver}
-          onChange={handleChange}
-          className="fraud-input"
+          placeholder="Transaction Location"
+          value={location}
+          onChange={(e) =>
+            setLocation(e.target.value)
+          }
         />
 
-        <select
-          name="transactionType"
-          value={formData.transactionType}
-          onChange={handleChange}
-          className="fraud-input"
-        >
-          <option value="">
-            Select Transaction Type
-          </option>
+        <input
+          type="text"
+          placeholder="Device Type"
+          value={device}
+          onChange={(e) =>
+            setDevice(e.target.value)
+          }
+        />
 
-          <option value="bank">
-            Bank Transfer
-          </option>
-
-          <option value="upi">
-            UPI
-          </option>
-
-          <option value="crypto">
-            Crypto
-          </option>
-        </select>
-
-        <button
-          type="submit"
-          className="analyze-btn"
-        >
-          {loading
-            ? "Checking..."
-            : "Check Transaction"}
+        <button type="submit">
+          Analyze Transaction
         </button>
       </form>
 
       {result && (
-        <div className="result-card">
-          <h2>Fraud Analysis Result</h2>
+        <div className="result-box">
+          <h2>{result}</h2>
 
           <p>
-            <strong>Risk Level:</strong>{" "}
-            {result.risk}
-          </p>
-
-          <p>
-            <strong>Fraud Score:</strong>{" "}
-            {result.score}
-          </p>
-
-          <p>
-            <strong>Message:</strong>{" "}
-            {result.message}
+            AI system analyzed transaction
+            behavior successfully.
           </p>
         </div>
       )}

@@ -1,68 +1,59 @@
 import { useState } from "react";
 
 function ScamAnalyzer() {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] =
+    useState("");
 
-  const [result, setResult] = useState(null);
+  const [result, setResult] =
+    useState("");
 
-  const [loading, setLoading] = useState(false);
+  const analyzeMessage = (e) => {
+    e.preventDefault();
 
-  const handleAnalyze = async () => {
-    if (!message.trim()) return;
-
-    setLoading(true);
-
-    setTimeout(() => {
-      setResult({
-        risk: "High",
-        score: "92%",
-        reason:
-          "Suspicious urgency and phishing keywords detected.",
-      });
-
-      setLoading(false);
-    }, 1500);
+    if (
+      message.includes("OTP") ||
+      message.includes("bank") ||
+      message.includes("urgent") ||
+      message.includes("password")
+    ) {
+      setResult(
+        "⚠️ Scam Detected in Message"
+      );
+    } else {
+      setResult(
+        "✅ Message Looks Safe"
+      );
+    }
   };
 
   return (
     <div className="page">
       <h1>Scam Message Analyzer</h1>
 
-      <textarea
-        placeholder="Paste suspicious message here..."
-        value={message}
-        onChange={(e) =>
-          setMessage(e.target.value)
-        }
-        className="scam-textarea"
-      />
-
-      <button
-        onClick={handleAnalyze}
-        className="analyze-btn"
+      <form
+        className="fraud-form"
+        onSubmit={analyzeMessage}
       >
-        {loading
-          ? "Analyzing..."
-          : "Analyze Message"}
-      </button>
+        <textarea
+          placeholder="Paste suspicious message here..."
+          value={message}
+          onChange={(e) =>
+            setMessage(e.target.value)
+          }
+        />
+
+        <button type="submit">
+          Analyze Message
+        </button>
+      </form>
 
       {result && (
-        <div className="result-card">
-          <h2>Analysis Result</h2>
+        <div className="result-box">
+          <h2>{result}</h2>
 
           <p>
-            <strong>Risk Level:</strong>{" "}
-            {result.risk}
-          </p>
-
-          <p>
-            <strong>Fraud Score:</strong>{" "}
-            {result.score}
-          </p>
-
-          <p>
-            <strong>Reason:</strong>{" "}
-            {result.reason}
+            AI NLP engine analyzed the
+            suspicious message successfully.
           </p>
         </div>
       )}

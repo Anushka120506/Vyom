@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 function TransactionTable() {
   const transactions = [
     {
@@ -30,8 +32,15 @@ function TransactionTable() {
   ];
 
   return (
-    <div className="table-container">
-      <h2>Recent Transactions</h2>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="table-container"
+    >
+      <div className="table-header">
+        <h2>Recent Transactions</h2>
+      </div>
 
       <table>
         <thead>
@@ -50,14 +59,18 @@ function TransactionTable() {
 
               <td>{item.amount}</td>
 
-              <td>{item.status}</td>
+              <td>
+                <span className="status-chip">
+                  {item.status}
+                </span>
+              </td>
 
               <td>{item.risk}</td>
             </tr>
           ))}
         </tbody>
       </table>
-    </div>
+    </motion.div>
   );
 }
 

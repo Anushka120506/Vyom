@@ -3,32 +3,61 @@ import {
   Line,
   XAxis,
   YAxis,
-  Tooltip,
+  Tooltip,c 
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
 
+import { motion } from "framer-motion";
 function FraudChart() {
   const data = [
-    { day: "Mon", fraud: 12 },
-    { day: "Tue", fraud: 18 },
-    { day: "Wed", fraud: 9 },
-    { day: "Thu", fraud: 24 },
-    { day: "Fri", fraud: 15 },
+    {
+      month: "Jan",
+      frauds: 40,
+    },
+
+    {
+      month: "Feb",
+      frauds: 65,
+    },
+
+    {
+      month: "Mar",
+      frauds: 52,
+    },
+
+    {
+      month: "Apr",
+      frauds: 81,
+    },
+
+    {
+      month: "May",
+      frauds: 73,
+    },
+
+    {
+      month: "Jun",
+      frauds: 95,
+    },
   ];
 
   return (
-    <div className="chart-container">
-      <h2>Fraud Activity Overview</h2>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+   className="chart-container">
+      <h2>Fraud Detection Trends</h2>
 
       <ResponsiveContainer
         width="100%"
-        height={300}
+        height={350}
       >
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
 
-          <XAxis dataKey="day" />
+          <XAxis dataKey="month" />
 
           <YAxis />
 
@@ -36,8 +65,9 @@ function FraudChart() {
 
           <Line
             type="monotone"
-            dataKey="fraud"
-            stroke="#ff4d4f"
+            dataKey="frauds"
+            stroke="#2563eb"
+            strokeWidth={3}
           />
         </LineChart>
       </ResponsiveContainer>
