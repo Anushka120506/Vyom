@@ -1,80 +1,93 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
 
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  CartesianGrid,
-} from "recharts";
+function FraudDetection() {
+  const [amount, setAmount] =
+    useState("");
 
-function FraudChart() {
-  const data = [
-    {
-      month: "Jan",
-      frauds: 40,
-    },
+  const [location, setLocation] =
+    useState("");
 
-    {
-      month: "Feb",
-      frauds: 65,
-    },
+  const [device, setDevice] =
+    useState("");
 
-    {
-      month: "Mar",
-      frauds: 52,
-    },
+  const [result, setResult] =
+    useState("");
 
-    {
-      month: "Apr",
-      frauds: 81,
-    },
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    {
-      month: "May",
-      frauds: 73,
-    },
+    if (
+      amount === "" ||
+      location === "" ||
+      device === ""
+    ) {
+      setResult("Please fill all fields");
+      return;
+    }
 
-    {
-      month: "Jun",
-      frauds: 95,
-    },
-  ];
+    if (amount > 5000) {
+      setResult(
+        "⚠️ High Fraud Risk Detected"
+      );
+    } else {
+      setResult(
+        "✅ Transaction Looks Safe"
+      );
+    }
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="chart-container"
-    >
-      <h2>Fraud Detection Trends</h2>
+    <div className="page">
+      <h1>Fraud Detection System</h1>
 
-      <ResponsiveContainer
-        width="100%"
-        height={350}
+      <form
+        className="fraud-form"
+        onSubmit={handleSubmit}
       >
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+        <input
+          type="number"
+          placeholder="Transaction Amount"
+          value={amount}
+          onChange={(e) =>
+            setAmount(e.target.value)
+          }
+        />
 
-          <XAxis dataKey="month" />
+        <input
+          type="text"
+          placeholder="Transaction Location"
+          value={location}
+          onChange={(e) =>
+            setLocation(e.target.value)
+          }
+        />
 
-          <YAxis />
+        <input
+          type="text"
+          placeholder="Device Type"
+          value={device}
+          onChange={(e) =>
+            setDevice(e.target.value)
+          }
+        />
 
-          <Tooltip />
+        <button type="submit">
+          Analyze Transaction
+        </button>
+      </form>
 
-          <Line
-            type="monotone"
-            dataKey="frauds"
-            stroke="#2563eb"
-            strokeWidth={3}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </motion.div>
+      {result && (
+        <div className="result-box">
+          <h2>{result}</h2>
+
+          <p>
+            AI system analyzed transaction
+            behavior successfully.
+          </p>
+        </div>
+      )}
+    </div>
   );
 }
 
-export default FraudChart;
+export default FraudDetection;
