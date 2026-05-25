@@ -350,3 +350,20 @@ tr:hover {
     #22c55e
   );
 }
+/* =========================
+   STATUS CHIP
+========================= */
+
+.status-chip {
+  background-color: #2563eb;
+
+  padding: 8px 14px;
+
+  border-radius: 30px;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  display: inline-block;
+}
