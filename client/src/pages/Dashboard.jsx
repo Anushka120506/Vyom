@@ -1,5 +1,6 @@
 import RiskCard from "../components/RiskCard";
 import TransactionTable from "../components/TransactionTable";
+import FraudChart from "../components/FraudChart";
 
 function Dashboard() {
   return (
@@ -31,6 +32,8 @@ function Dashboard() {
           status="AI Detection Running"
         />
       </div>
+
+      <FraudChart />
 
       <TransactionTable />
     </div>

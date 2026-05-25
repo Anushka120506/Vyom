@@ -187,3 +187,24 @@ td {
 tr:hover {
   background-color: #1e293b;
 }
+/* =========================
+   FRAUD CHART
+========================= */
+
+.chart-container {
+  margin-top: 50px;
+
+  background-color: #111827;
+
+  padding: 30px;
+
+  border-radius: 12px;
+
+  border: 1px solid #1f2937;
+}
+
+.chart-container h2 {
+  margin-bottom: 30px;
+
+  font-size: 24px;
+}
