@@ -22,7 +22,7 @@ button {
 }
 
 /* =========================
-   NAVBAR STYLING
+   NAVBAR
 ========================= */
 
 .navbar {
@@ -41,9 +41,7 @@ button {
 }
 
 .logo h2 {
-  color: #ffffff;
-  font-size: 28px;
-  letter-spacing: 1px;
+  font-size: 32px;
 }
 
 .nav-links {
@@ -54,9 +52,6 @@ button {
 .nav-links a {
   color: #d1d5db;
 
-  font-size: 16px;
-  font-weight: 500;
-
   transition: 0.3s ease;
 }
 
@@ -65,24 +60,79 @@ button {
 }
 
 /* =========================
-   PAGE LAYOUT
+   DASHBOARD LAYOUT
 ========================= */
 
-.page {
+.dashboard-layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+
+  min-height: 100vh;
+
+  background-color: #111827;
+
+  border-right: 1px solid #1f2937;
+
+  padding: 30px 20px;
+}
+
+.sidebar-logo {
+  font-size: 30px;
+
+  margin-bottom: 40px;
+}
+
+.sidebar-links {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.sidebar-links a {
+  padding: 14px 18px;
+
+  border-radius: 10px;
+
+  transition: 0.3s ease;
+}
+
+.sidebar-links a:hover {
+  background-color: #1e293b;
+}
+
+.sidebar-links .active {
+  background-color: #2563eb;
+}
+
+.dashboard-content {
+  flex: 1;
+
   padding: 40px;
 }
 
-.page h1 {
-  font-size: 42px;
-  margin-bottom: 20px;
+/* =========================
+   DASHBOARD HEADER
+========================= */
+
+.dashboard-header h1 {
+  font-size: 48px;
+
+  margin-bottom: 10px;
 }
 
-.page p {
-  color: #d1d5db;
+.dashboard-header p {
+  color: #9ca3af;
+
   font-size: 18px;
 }
+
 /* =========================
-   DASHBOARD
+   DASHBOARD GRID
 ========================= */
 
 .dashboard-grid {
@@ -96,12 +146,16 @@ button {
   gap: 25px;
 }
 
+/* =========================
+   RISK CARDS
+========================= */
+
 .risk-card {
   background-color: #111827;
 
   padding: 30px;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
   border: 1px solid #1f2937;
 
@@ -114,27 +168,60 @@ button {
   border-color: #2563eb;
 }
 
+.risk-card-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.risk-icon {
+  font-size: 22px;
+
+  color: #3b82f6;
+}
+
 .risk-card h3 {
   color: #9ca3af;
 
-  font-size: 18px;
-
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .risk-card h1 {
   font-size: 42px;
 
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .risk-card p {
   color: #22c55e;
-
-  font-size: 15px;
 }
+
 /* =========================
-   TRANSACTION TABLE
+   CHART
+========================= */
+
+.chart-container {
+  margin-top: 50px;
+
+  background-color: #111827;
+
+  padding: 30px;
+
+  border-radius: 14px;
+
+  border: 1px solid #1f2937;
+}
+
+.chart-container h2 {
+  margin-bottom: 25px;
+}
+
+/* =========================
+   TABLE
 ========================= */
 
 .table-container {
@@ -144,15 +231,13 @@ button {
 
   padding: 30px;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
   border: 1px solid #1f2937;
 }
 
 .table-container h2 {
   margin-bottom: 25px;
-
-  font-size: 24px;
 }
 
 table {
@@ -174,26 +259,32 @@ td {
   border-bottom: 1px solid #374151;
 }
 
-th {
-  color: #d1d5db;
+.status-chip {
+  background-color: #2563eb;
 
-  font-size: 15px;
-}
+  padding: 8px 14px;
 
-td {
-  color: #ffffff;
-}
+  border-radius: 30px;
 
-tr:hover {
-  background-color: #1e293b;
+  font-size: 14px;
 }
 
 /* =========================
    FRAUD FORM
 ========================= */
 
+.page {
+  padding: 40px;
+}
+
+.page h1 {
+  font-size: 42px;
+
+  margin-bottom: 20px;
+}
+
 .fraud-form {
-  margin-top: 40px;
+  margin-top: 30px;
 
   max-width: 500px;
 
@@ -204,7 +295,8 @@ tr:hover {
   gap: 20px;
 }
 
-.fraud-form input {
+.fraud-form input,
+textarea {
   background-color: #111827;
 
   border: 1px solid #374151;
@@ -213,29 +305,19 @@ tr:hover {
 
   border-radius: 10px;
 
-  color: #ffffff;
-
-  font-size: 16px;
+  color: white;
 }
 
 .fraud-form button {
   background-color: #2563eb;
 
-  color: #ffffff;
+  color: white;
 
   padding: 15px;
 
   border-radius: 10px;
 
   font-size: 16px;
-
-  font-weight: 600;
-
-  transition: 0.3s ease;
-}
-
-.fraud-form button:hover {
-  background-color: #1d4ed8;
 }
 
 .result-box {
@@ -250,9 +332,26 @@ tr:hover {
   border: 1px solid #374151;
 }
 
-.result-box p {
-  color: #9ca3af;
+/* =========================
+   RESPONSIVE
+========================= */
 
-  margin-top: 10px;
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+
+    min-height: auto;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
 }
-

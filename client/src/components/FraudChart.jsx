@@ -3,12 +3,13 @@ import {
   Line,
   XAxis,
   YAxis,
-  Tooltip,c 
+  Tooltip,
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
 
 import { motion } from "framer-motion";
+
 function FraudChart() {
   const data = [
     {
@@ -47,7 +48,8 @@ function FraudChart() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-   className="chart-container">
+      className="chart-container"
+    >
       <h2>Fraud Detection Trends</h2>
 
       <ResponsiveContainer
@@ -71,7 +73,7 @@ function FraudChart() {
           />
         </LineChart>
       </ResponsiveContainer>
-    </div>
+    </motion.div>
   );
 }
 
