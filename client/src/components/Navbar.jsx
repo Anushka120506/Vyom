@@ -1,26 +1,56 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { FaShieldAlt, FaSignOutAlt, FaUserShield } from "react-icons/fa";
 
-function Navbar() {
+function Navbar({ user, onLogout }) {
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    onLogout();
+    navigate("/");
+  };
+
   return (
     <nav className="navbar">
       <div className="logo">
-        <h2>VYOM</h2>
+        <Link to="/" className="logo-link">
+          <FaShieldAlt className="logo-icon" />
+          <span>VYOM</span>
+        </Link>
       </div>
 
       <div className="nav-links">
-        <Link to="/">Home</Link>
+        <NavLink to="/" end>
+          Home
+        </NavLink>
 
-        <Link to="/dashboard">
-          Dashboard
-        </Link>
-
-        <Link to="/fraud-detection">
-          Fraud Detection
-        </Link>
-
-        <Link to="/scam-analyzer">
-          Scam Analyzer
-        </Link>
+        {user ? (
+          <>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/fraud-detection">Fraud Simulator</NavLink>
+            <NavLink to="/scam-analyzer">NLP Message Scan</NavLink>
+            <div className="nav-user-profile">
+              <FaUserShield className="profile-icon" />
+              <span className="profile-name">{user.name.split(" ")[0]}</span>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="nav-logout-btn"
+                title="Deauthorize session"
+              >
+                <FaSignOutAlt />
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="nav-btn-secondary">
+              Secure Access
+            </Link>
+            <Link to="/register" className="nav-btn-primary">
+              Deploy Hub
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );

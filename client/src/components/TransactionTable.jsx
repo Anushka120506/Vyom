@@ -1,35 +1,31 @@
 import { motion } from "framer-motion";
 
-function TransactionTable() {
-  const transactions = [
-    {
-      id: "#TXN1021",
-      amount: "$1200",
-      status: "Blocked",
-      risk: "High",
-    },
+function TransactionTable({ transactions = [] }) {
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "blocked":
+        return "chip-blocked";
+      case "monitoring":
+        return "chip-monitoring";
+      case "approved":
+        return "chip-approved";
+      default:
+        return "chip-pending";
+    }
+  };
 
-    {
-      id: "#TXN2045",
-      amount: "$850",
-      status: "Safe",
-      risk: "Low",
-    },
-
-    {
-      id: "#TXN7781",
-      amount: "$4300",
-      status: "Blocked",
-      risk: "Critical",
-    },
-
-    {
-      id: "#TXN5522",
-      amount: "$640",
-      status: "Monitoring",
-      risk: "Medium",
-    },
-  ];
+  const getRiskColor = (level) => {
+    switch (level) {
+      case "critical":
+        return "text-critical";
+      case "high":
+        return "text-high";
+      case "medium":
+        return "text-medium";
+      default:
+        return "text-low";
+    }
+  };
 
   return (
     <motion.div
@@ -39,37 +35,46 @@ function TransactionTable() {
       className="table-container"
     >
       <div className="table-header">
-        <h2>Recent Transactions</h2>
+        <h2>Recent Transaction Logs</h2>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Transaction ID</th>
-            <th>Amount</th>
-            <th>Status</th>
-            <th>Risk Level</th>
-          </tr>
-        </thead>
+      <div className="table-responsive-box">
+        {transactions.length === 0 ? (
+          <div className="empty-table-prompt">
+            No transactions found. Submit a run using the Fraud Detection panel.
+          </div>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Txn Hash</th>
+                <th>Created At</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Risk Score</th>
+              </tr>
+            </thead>
 
-        <tbody>
-          {transactions.map((item, index) => (
-            <tr key={index}>
-              <td>{item.id}</td>
-
-              <td>{item.amount}</td>
-
-              <td>
-                <span className="status-chip">
-                  {item.status}
-                </span>
-              </td>
-
-              <td>{item.risk}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            <tbody>
+              {transactions.map((txn, index) => (
+                <tr key={txn._id || index}>
+                  <td className="font-mono text-sm">{txn.txnId}</td>
+                  <td>{new Date(txn.createdAt).toLocaleString()}</td>
+                  <td className="font-semibold">₹{txn.amount.toLocaleString()}</td>
+                  <td>
+                    <span className={`status-chip ${getStatusColor(txn.status)}`}>
+                      {txn.status.toUpperCase()}
+                    </span>
+                  </td>
+                  <td className={`font-bold ${getRiskColor(txn.riskLevel)}`}>
+                    {txn.riskScore}/100 ({txn.riskLevel})
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </motion.div>
   );
 }
