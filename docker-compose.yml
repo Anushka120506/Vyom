@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: vyom-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - vyom-network
+
+  ai-engine:
+    build:
+      context: ./ai-engine
+    container_name: vyom-ai-engine
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+    networks:
+      - vyom-network
+
+  server:
+    build:
+      context: ./server
+    container_name: vyom-server
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - CLIENT_URL=http://localhost:5173
+      - MONGODB_URI=mongodb://mongodb:27017/vyom
+      - JWT_SECRET=${JWT_SECRET:-428a16dbb239e248f72c3a50d2e85ab89d3cf2cf262f2bc7d853bb9671d4bf5968b5a004efbb22ff611c07db9cbcfebcdba4c69865f375f110c732009be282f6}
+      - JWT_EXPIRES_IN=7d
+      - LOG_LEVEL=info
+      - AI_ENGINE_URL=http://ai-engine:8000
+    depends_on:
+      - mongodb
+      - ai-engine
+    networks:
+      - vyom-network
+
+  client:
+    build:
+      context: ./client
+      args:
+        - VITE_API_URL=http://localhost:5000/api
+        - VITE_SOCKET_URL=http://localhost:5000
+    container_name: vyom-client
+    restart: always
+    ports:
+      - "5173:80"
+    depends_on:
+      - server
+    networks:
+      - vyom-network
+
+networks:
+  vyom-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
