@@ -1,33 +1,25 @@
-import { motion } from "framer-motion";
-
-function RiskCard({
-  title,
-  value,
-  status,
-  icon,
-}) {
+export default function RiskCard({ title, value, status, icon, color = 'var(--accent)', trend }) {
   return (
-    <motion.div
-      whileHover={{
-        scale: 1.03,
-      }}
-      className="risk-card"
-    >
-      <div className="risk-card-top">
-        <div className="risk-icon">
+    <div className="stat-card" style={{ '--card-accent': color }}>
+      <div className="stat-card-header">
+        <span className="stat-label">{title}</span>
+        <div className="stat-icon" style={{ 
+          '--icon-color': color, 
+          '--icon-bg': `${color}15` // 15 is hex opacity (approx 8%)
+        }}>
           {icon}
         </div>
-
-        <h3>{title}</h3>
       </div>
-
-      <div className="risk-card-body">
-        <h1>{value}</h1>
-
-        <p>{status}</p>
+      <div className="stat-value">{value}</div>
+      <div className="stat-sub">
+        <div className="dot" style={{ background: color }}></div>
+        {status}
+        {trend && (
+          <span style={{ marginLeft: 'auto', color: trend > 0 ? 'var(--danger)' : 'var(--success)' }}>
+            {trend > 0 ? '↑' : '↓'} {Math.abs(trend)}%
+          </span>
+        )}
       </div>
-    </motion.div>
+    </div>
   );
 }
-
-export default RiskCard;
